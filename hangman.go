@@ -2,8 +2,8 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"log"
+	"math/rand"
 	"os"
 )
 
@@ -11,7 +11,7 @@ func main() {
 	var tableau []string
 
 	// open the file
-	file, err := os.Open("words.txt")
+	file, err := os.Open("./Ressources/words.txt")
 
 	//handle errors while opening
 	if err != nil {
@@ -31,7 +31,9 @@ func main() {
 	}
 
 	//Lecture à l'indice de la ligne
-	fmt.Println(tableau[5])
+	println(len(tableau))
+	nombre := rand.Intn(len(tableau))
+	println(nombre)
 
 	file.Close()
 }
