@@ -32,6 +32,8 @@ func choixLettre() string {
 func main() {
 	var tableau []string
 	var motCache []string
+	tentative := 10
+	test3 := 0
 	// open the file
 	file, err := os.Open("./Ressources/words.txt")
 
@@ -72,19 +74,41 @@ func main() {
 		index := rand.Intn(len(motCache))
 		motCache[index] = string(motChoisit[index])
 	}
+	test3 = lettresAffichees
+
 	for i := range motCache {
 		print(motCache[i])
 	}
-	println()
-	lettre := choixLettre()
-	println("la lettre choisit est : ", lettre)
 
-	for i := 0; i < len(motChoisit); i++ {
-		if lettre == string(motChoisit[i]) {
-			println("caca")
-		} else {
-			println("prout")
+	for tentative != 0 {
+		println()
+		println(test3, " ", len(motChoisit))
+		println()
+		println("Tentative restante :", tentative)
+		lettre := choixLettre()
+		println("la lettre choisit est : ", lettre)
+
+		test2 := 0
+		for i := 0; i < len(motChoisit); i++ {
+
+			if lettre == string(motChoisit[i]) {
+				motCache[i] = string(motChoisit[i])
+				test3++
+			} else {
+				test2++
+			}
 		}
+		if test2 == len(motChoisit) {
+			tentative -= 1
+		}
+		if test3 == len(motChoisit) {
+			println("\ngg Hitler")
+		}
+		for i := range motCache {
+			print(motCache[i])
+		}
+
 	}
+
 	file.Close()
 }
