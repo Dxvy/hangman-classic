@@ -1,19 +1,37 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 )
 
 func main() {
+	var tableau []string
 
-	content, err := ioutil.ReadFile("./Ressources/words.txt")
+	// open the file
+	file, err := os.Open("words.txt")
 
+	//handle errors while opening
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error when opening file: %s", err)
 	}
 
-	fmt.Println(string(content))
-	println("test")
+	fileScanner := bufio.NewScanner(file)
+
+	// read line by line
+	for fileScanner.Scan() {
+		tableau = append(tableau, fileScanner.Text())
+	}
+
+	// handle first encountered error while reading
+	if err := fileScanner.Err(); err != nil {
+		log.Fatalf("Error while reading file: %s", err)
+	}
+
+	//Lecture à l'indice de la ligne
+	fmt.Println(tableau[5])
+
+	file.Close()
 }
