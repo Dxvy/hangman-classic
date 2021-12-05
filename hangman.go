@@ -19,10 +19,11 @@ func Input() string { // Fonction pour récupérer le texte écrit dans le cmd e
 }
 
 func choixLettre() string {
-	println("Choisis une lettre : ")
+	println("Choisis une lettre (en minuscule) : ")
 	lettre := Input()
-	if len(lettre) > 1 {
-		println("On a dit une lettre...")
+	test := []rune(lettre)
+	if len(lettre) > 1 || test[0] < 'a' || test[0] > 'z' {
+		println("On a dit une lettre (en minuscule) ...")
 		return choixLettre()
 	}
 	return lettre
