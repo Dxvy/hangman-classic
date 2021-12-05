@@ -79,5 +79,12 @@ func main() {
 	lettre := choixLettre()
 	println("la lettre choisit est : ", lettre)
 
+	for i := 0; i < len(motChoisit); i++ {
+		if lettre == string(motChoisit[i]) {
+			println("caca")
+		} else {
+			println("prout")
+		}
+	}
 	file.Close()
 }
