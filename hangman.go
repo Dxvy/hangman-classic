@@ -2,11 +2,31 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"math/rand"
 	"os"
+	"strings"
 	"time"
 )
+
+func Input() string { // Fonction pour récupérer le texte écrit dans le cmd et l'utiliser
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("-> ")
+	text, _ := reader.ReadString('\n')
+	text = strings.Replace(text, "\r\n", "", -1)
+	return text
+}
+
+func choixLettre() string {
+	println("Choisis une lettre : ")
+	lettre := Input()
+	if len(lettre) > 1 {
+		println("On a dit une lettre...")
+		return choixLettre()
+	}
+	return lettre
+}
 
 func main() {
 	var tableau []string
@@ -54,5 +74,9 @@ func main() {
 	for i := range motCache {
 		print(motCache[i])
 	}
+	println()
+	lettre := choixLettre()
+	println("la lettre choisit est : ", lettre)
+
 	file.Close()
 }
