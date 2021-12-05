@@ -5,6 +5,7 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"time"
 )
 
 func main() {
@@ -32,6 +33,7 @@ func main() {
 
 	//Lecture à l'indice de la ligne
 	println(len(tableau))
+	rand.Seed(time.Now().UnixNano())
 	nombre := rand.Intn(len(tableau))
 	println(nombre)
 
