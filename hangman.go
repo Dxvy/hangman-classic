@@ -29,6 +29,7 @@ func main() {
 	var motCache []string
 	tentative := 10
 	test3 := 0
+
 	// open the file
 	file, err := os.Open("./Ressources/words.txt")
 	//handle errors while opening
@@ -51,6 +52,7 @@ func main() {
 	println(nombre)
 	motChoisit := tableau[nombre]
 	println(motChoisit)
+	var proposition []string
 	for i := 0; i < len(motChoisit); i++ {
 		motCache = append(motCache, "_")
 	}
@@ -68,10 +70,26 @@ func main() {
 		print(motCache[i])
 	}
 	for tentative != 0 {
+		test4 := 0
 		println()
 		println(test3, " ", len(motChoisit))
 		println("Tentative restante :", tentative)
 		lettre := choixLettre()
+		for i := range proposition {
+			if lettre == proposition[i] {
+				test4++
+			}
+		}
+		if test4 != 0 {
+			println("Cette proposition a déjà été faite !!!")
+			continue
+		}
+		if test4 == 0 {
+			proposition = append(proposition, lettre)
+		}
+		for i := range proposition {
+			println(proposition[i])
+		}
 		println("la lettre choisit est : ", lettre)
 		test2 := 0
 		for i := 0; i < len(motChoisit); i++ {
