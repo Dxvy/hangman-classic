@@ -18,7 +18,7 @@ var isFind = 0
 var chosenWord string
 
 func main() {
-	fileScanner := createScanner("./Ressources/words.txt")
+	fileScanner := createScanner(os.Args[1])
 	array = getWords(fileScanner, array)
 	rand.Seed(time.Now().UnixNano())
 	nombre := rand.Intn(len(array))
