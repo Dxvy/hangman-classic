@@ -30,9 +30,13 @@ func main() {
 }
 
 func start() {
+	println()
+	println("Good Luck, you have ", attempt, " attempts")
 	for attempt != 0 {
 		verifLettersUsed := 0
-		println("Tentative restante :", attempt)
+		println()
+		//println("Tentative restante :", attempt)
+		println()
 		printToFindWord()
 		displayHangman(attempt, "./Ressources/Hangman.txt")
 		letter := trySomething()
@@ -43,12 +47,14 @@ func start() {
 		}
 		if verifLettersUsed != 0 {
 			println("Cette letter a déjà été faite !!!")
+			println()
 			continue
 		}
 		if verifLettersUsed == 0 {
 			trial = append(trial, letter)
 		}
-		println("la letter choisit est : ", letter)
+		println()
+		println("Choosed : ", letter)
 		displayProposition(trial)
 		verifGoodProposition := 0
 		for i := 0; i < len(chosenWord); i++ {
@@ -59,16 +65,30 @@ func start() {
 				verifGoodProposition++
 			}
 		}
+		if letter == chosenWord {
+			println("\nCongrats !!! You find the word : ", chosenWord, " in ", attempt, " attempts")
+			println()
+			break
+		}
 		if verifGoodProposition == len(chosenWord) {
 			if len(letter) == 1 {
 				attempt--
 			} else {
 				attempt -= 2
+				if attempt < 0 {
+					attempt = 0
+				}
 			}
+			println()
+			println("Not present in the word, ", attempt, " attempts remaining")
 		}
 		if isFind == len(chosenWord) {
-			println("\ngg Hitler")
+			println("\nCongrats !!! You find the word : ", chosenWord, " in ", attempt, " attempts")
+			println()
 			break
+		}
+		if attempt == 0 {
+			loose()
 		}
 	}
 }
@@ -111,13 +131,14 @@ func input() string { // Fonction pour récupérer le texte écrit dans le cmd e
 }
 
 func trySomething() string {
-	println("Choisis une lettre (en minuscule) : ")
+	println("Make a proposition : ")
 	lettre := input()
 	return lettre
 }
 
 func displayProposition(proposition []string) {
-	println("Voici les propositions déjà tentées :")
+	println()
+	println("Here the attempts already tried :")
 	for i := range proposition {
 		print(proposition[i] + " ")
 	}
@@ -166,9 +187,6 @@ func displayHangman(tentative int, nomFichier string) {
 	case 1:
 		debut = 64
 		fin = 71
-	case 0:
-		debut = 72
-		fin = 79
 	}
 	println()
 	for fileScanner.Scan() {
@@ -183,4 +201,24 @@ func manageError(err error) {
 	if err != nil {
 		log.Fatalf("Error when opening file: %s", err)
 	}
+}
+
+func loose() {
+	file, err := os.Open("./Ressources/hangman.txt")
+	manageError(err)
+	fileScanner := bufio.NewScanner(file)
+	i := 0
+	println()
+	for fileScanner.Scan() {
+		if i >= 72 && i <= 79 {
+			println(fileScanner.Text())
+		}
+		i++
+	}
+	println("Sorry you loose bro, try again !!!!")
+	println()
+}
+
+func win() {
+
 }
