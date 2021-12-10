@@ -238,6 +238,8 @@ func hub() { //Menu de base
 	println("}      - You have a total of 10 attempts                                             {")
 	println("}      - If the letter you tried is false, you lose 1 attempt                        {")
 	println("}      - If the word you tried is false, you lose 2 attempts                         {")
+	println("}      - Some letters are already displayed                                          {")
+	println("}      - Displayed letters can be twice in the word, so you have to try them         {")
 	println("}                                                                                    {")
 	println("}      You win when the word is totally discovered                                   {")
 	println("}      If your attempts fall to 0, you will loose and hanged                         {")
