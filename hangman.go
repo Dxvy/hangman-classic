@@ -33,9 +33,12 @@ func main() { //Programme principal
 
 func start() { //Programme de lancement du jeu
 	for attempt != 0 { //Boucle d'entrée du jeu'
+		println("Mot a déviner : ", chosenWord)
+		println("isFind : ", isFind, "   lenChosenWord : ", len(chosenWord))
 		verifLettersUsed := 0
 		printToFindWord()
 		displayHangman(attempt, "./Ressources/Hangman.txt")
+		displayProposition(trial)
 		letter := trySomething()
 		for i := range trial {
 			if letter == trial[i] {
@@ -43,14 +46,13 @@ func start() { //Programme de lancement du jeu
 			}
 		}
 		if verifLettersUsed != 0 { //Vérification si proposition déjà faites
-			println("Cette letter a déjà été faite !!!")
+			println("You already tried that !!!")
 			continue
 		}
 		if verifLettersUsed == 0 { //Ajouts aux propositions passées
 			trial = append(trial, letter)
 		}
 		println("Choosed : ", letter)
-		displayProposition(trial)
 		verifGoodProposition := 0
 		for i := 0; i < len(chosenWord); i++ { //Vérification si la lettre est présente dans le mot
 			if letter == string(chosenWord[i]) && string(hiddenWord[i]) == "_" {
@@ -59,6 +61,11 @@ func start() { //Programme de lancement du jeu
 			} else {
 				verifGoodProposition++
 			}
+		}
+
+		if letter == chosenWord { //Vérification si le mot a été trouvé (via une proposition de mot)
+			println("\nCongrats !!! You find the word : ", chosenWord, " with ", attempt, " attempts left")
+			break
 		}
 		if verifGoodProposition == len(chosenWord) { //Modification du compteur d'essai en cas d'échec
 			if len(letter) == 1 {
@@ -72,10 +79,6 @@ func start() { //Programme de lancement du jeu
 			println("Not present in the word, ", attempt, " attempts remaining")
 		}
 		if isFind == len(chosenWord) { //Vérification si le mot a été trouvé (via une proposition de lettre)
-			println("\nCongrats !!! You find the word : ", chosenWord, " with ", attempt, " attempts left")
-			break
-		}
-		if letter == chosenWord { //Vérification si le mot a été trouvé (via une proposition de mot)
 			println("\nCongrats !!! You find the word : ", chosenWord, " with ", attempt, " attempts left")
 			break
 		}
@@ -94,10 +97,17 @@ func getWords(fileScanner *bufio.Scanner, array []string) []string { //Programme
 }
 
 func showToFindLetters() int { //Choix des lettres affichées dès le début
-	displayedLetters := (len(hiddenWord) / 2) - 1
-	for i := 0; i < displayedLetters; i++ {
+	lettersToDisplay := (len(hiddenWord) / 2) - 1
+	var displayedLetters int
+	println("displayedLetters : ", lettersToDisplay)
+	for i := 0; i < lettersToDisplay; i++ {
 		index := rand.Intn(len(hiddenWord))
+		if hiddenWord[index] == "_" {
+			displayedLetters++
+		}
 		hiddenWord[index] = string(chosenWord[index])
+
+		println("index : ", index, "  ", i, "itérations")
 	}
 	return displayedLetters
 }
