@@ -17,10 +17,16 @@ var trial []string
 var attempt = 10
 var isFind = 0 //Compteur des lettres trouvées
 var chosenWord string
+var file string
 
 func main() { //Programme principal
 	hub()
-	fileScanner := createScanner(os.Args[1])
+	if len(os.Args) > 1 {
+		file = os.Args[1]
+	} else {
+		file = "./Ressources/words.txt"
+	}
+	fileScanner := createScanner(file)
 	array = getWords(fileScanner, array)
 	rand.Seed(time.Now().UnixNano()) //Initialisation de l'aléatoire
 	nombre := rand.Intn(len(array))
@@ -33,8 +39,6 @@ func main() { //Programme principal
 
 func start() { //Programme de lancement du jeu
 	for attempt != 0 { //Boucle d'entrée du jeu'
-		println("Mot a déviner : ", chosenWord)
-		println("isFind : ", isFind, "   lenChosenWord : ", len(chosenWord))
 		verifLettersUsed := 0
 		printToFindWord()
 		displayHangman(attempt, "./Ressources/Hangman.txt")
@@ -99,15 +103,12 @@ func getWords(fileScanner *bufio.Scanner, array []string) []string { //Programme
 func showToFindLetters() int { //Choix des lettres affichées dès le début
 	lettersToDisplay := (len(hiddenWord) / 2) - 1
 	var displayedLetters int
-	println("displayedLetters : ", lettersToDisplay)
 	for i := 0; i < lettersToDisplay; i++ {
 		index := rand.Intn(len(hiddenWord))
 		if hiddenWord[index] == "_" {
 			displayedLetters++
 		}
 		hiddenWord[index] = string(chosenWord[index])
-
-		println("index : ", index, "  ", i, "itérations")
 	}
 	return displayedLetters
 }
