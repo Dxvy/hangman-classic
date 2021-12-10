@@ -32,7 +32,6 @@ func main() { //Programme principal
 }
 
 func start() { //Programme de lancement du jeu
-	println("Good Luck, you have ", attempt, " attempts")
 	for attempt != 0 { //Boucle d'entrée du jeu'
 		verifLettersUsed := 0
 		printToFindWord()
@@ -210,21 +209,34 @@ func loose() { //Programme en cas d'échec
 	println("Sorry you loose bro, try again !!!!")
 }
 
-func hub() {
-	println("}============================================================{")
-	println("}                                                            {")
-	println("}       _    _              _   _   _____  __  __              _   _                                                  {")
-	println("}      | |  | |     /\\     | \\ | | / ____||  \\/  |     /\\     | \\ | |                                                       {")
-	println("}      | |__| |    /  \\    |  \\| || |  __ | \\  / |    /  \\    |  \\| |                                             {")
-	println("}      |  __  |   / /\\ \\   | . ` || | |_ || |\\/| |   / /\\ \\   | . ` |                                                         {")
-	println("}      | |  | |  / ____ \\  | |\\  || |__| || |  | |  / ____ \\  | |\\  |                                                       {")
-	println("}      |_|  |_| /_/    \\_\\ |_| \\_| \\_____||_|  |_| /_/    \\_\\ |_| \\_|                                                         {")
-	println("}                                                            {")
-	println("}                                                            {")
-	println("}                                                            {")
-	println("}                                                             {")
-	println("}                                                            {")
-	println("}                                                            {")
-	println("}                                                            {")
-	println("}============================================================{")
+func hub() { //Menu de base
+	println("}===================================================================================={")
+	println("}                                                                                    {")
+	println("}            _    _              _   _   _____  __  __              _   _            {")
+	println("}-----------| |  | |     /\\     | \\ | | / ____||  \\/  |     /\\     | \\ | |-----------{")
+	println("}-----------| |__| |    /  \\    |  \\| || |  __ | \\  / |    /  \\    |  \\| |-----------{")
+	println("}-----------|  __  |   / /\\ \\   | . ` || | |_ || |\\/| |   / /\\ \\   | . ` |-----------{")
+	println("}-----------| |  | |  / ____ \\  | |\\  || |__| || |  | |  / ____ \\  | |\\  |-----------{")
+	println("}-----------|_|  |_| /_/    \\_\\ |_| \\_| \\_____||_|  |_| /_/    \\_\\ |_| \\_|-----------{")
+	println("}                                                                                    {")
+	println("}                                                                                    {")
+	println("}      Welcome to the Hangman game !                                                 {")
+	println("}                                                                                    {")
+	println("}      The rules are the followings :                                                {")
+	println("}      - You're gonna have to find a hidden word                                     {")
+	println("}      - You can try to find it letter by letter, or by tapping directly a word      {")
+	println("}      - You have a total of 10 attempts                                             {")
+	println("}      - If the letter you tried is false, you lose 1 attempt                        {")
+	println("}      - If the word you tried is false, you lose 2 attempts                         {")
+	println("}                                                                                    {")
+	println("}      You win when the word is totally discovered                                   {")
+	println("}      If your attempts fall to 0, you will loose and hanged                         {")
+	println("}                                                                                    {")
+	println("}      Good luck                                                                     {")
+	println("}                                                                                    {")
+	println("}===================================================================================={")
+	println()
+	println()
+	println()
+	println()
 }
