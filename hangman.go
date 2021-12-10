@@ -222,7 +222,7 @@ func hub() {
 	println("}                                                            {")
 	println("}                                                            {")
 	println("}                                                            {")
-	println("}                                                            {")
+	println("}                                                             {")
 	println("}                                                            {")
 	println("}                                                            {")
 	println("}                                                            {")
