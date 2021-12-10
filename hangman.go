@@ -19,6 +19,7 @@ var isFind = 0 //Compteur des lettres trouvées
 var chosenWord string
 
 func main() { //Programme principal
+	hub()
 	fileScanner := createScanner(os.Args[1])
 	array = getWords(fileScanner, array)
 	rand.Seed(time.Now().UnixNano()) //Initialisation de l'aléatoire
@@ -31,11 +32,9 @@ func main() { //Programme principal
 }
 
 func start() { //Programme de lancement du jeu
-	println()
 	println("Good Luck, you have ", attempt, " attempts")
 	for attempt != 0 { //Boucle d'entrée du jeu'
 		verifLettersUsed := 0
-		println()
 		printToFindWord()
 		displayHangman(attempt, "./Ressources/Hangman.txt")
 		letter := trySomething()
@@ -46,13 +45,11 @@ func start() { //Programme de lancement du jeu
 		}
 		if verifLettersUsed != 0 { //Vérification si proposition déjà faites
 			println("Cette letter a déjà été faite !!!")
-			println()
 			continue
 		}
 		if verifLettersUsed == 0 { //Ajouts aux propositions passées
 			trial = append(trial, letter)
 		}
-		println()
 		println("Choosed : ", letter)
 		displayProposition(trial)
 		verifGoodProposition := 0
@@ -73,22 +70,20 @@ func start() { //Programme de lancement du jeu
 					attempt = 0
 				}
 			}
-			println()
 			println("Not present in the word, ", attempt, " attempts remaining")
 		}
 		if isFind == len(chosenWord) { //Vérification si le mot a été trouvé (via une proposition de lettre)
 			println("\nCongrats !!! You find the word : ", chosenWord, " with ", attempt, " attempts left")
-			println()
 			break
 		}
 		if letter == chosenWord { //Vérification si le mot a été trouvé (via une proposition de mot)
 			println("\nCongrats !!! You find the word : ", chosenWord, " with ", attempt, " attempts left")
-			println()
 			break
 		}
 		if attempt == 0 { //Vérification s'il reste des tentatives
 			loose()
 		}
+		println()
 	}
 }
 
@@ -136,7 +131,6 @@ func trySomething() string { //Propositions faites par le joueur
 }
 
 func displayProposition(proposition []string) { //Affichage des propositions déjà faites
-	println()
 	println("Here the attempts already tried :")
 	for i := range proposition {
 		print(proposition[i] + " ")
@@ -152,6 +146,7 @@ func createScanner(nomFichier string) *bufio.Scanner { //Programme de création 
 }
 
 func displayHangman(tentative int, nomFichier string) { //Programme pour afficher le hangman selon le nombre de tentatives restantes
+	println()
 	file, err := os.Open("./Ressources/hangman.txt")
 	manageError(err)
 	fileScanner := bufio.NewScanner(file)
@@ -187,7 +182,6 @@ func displayHangman(tentative int, nomFichier string) { //Programme pour affiche
 		debut = 64
 		fin = 71
 	}
-	println()
 	for fileScanner.Scan() {
 		if i >= debut && i <= fin {
 			println(fileScanner.Text())
@@ -207,7 +201,6 @@ func loose() { //Programme en cas d'échec
 	manageError(err)
 	fileScanner := bufio.NewScanner(file)
 	i := 0
-	println()
 	for fileScanner.Scan() {
 		if i >= 72 && i <= 79 {
 			println(fileScanner.Text())
@@ -215,5 +208,23 @@ func loose() { //Programme en cas d'échec
 		i++
 	}
 	println("Sorry you loose bro, try again !!!!")
-	println()
+}
+
+func hub() {
+	println("}============================================================{")
+	println("}                                                            {")
+	println("}       _    _              _   _   _____  __  __              _   _                                                  {")
+	println("}      | |  | |     /\\     | \\ | | / ____||  \\/  |     /\\     | \\ | |                                                       {")
+	println("}      | |__| |    /  \\    |  \\| || |  __ | \\  / |    /  \\    |  \\| |                                             {")
+	println("}      |  __  |   / /\\ \\   | . ` || | |_ || |\\/| |   / /\\ \\   | . ` |                                                         {")
+	println("}      | |  | |  / ____ \\  | |\\  || |__| || |  | |  / ____ \\  | |\\  |                                                       {")
+	println("}      |_|  |_| /_/    \\_\\ |_| \\_| \\_____||_|  |_| /_/    \\_\\ |_| \\_|                                                        {")
+	println("}                                                            {")
+	println("}                                                            {")
+	println("}                                                            {")
+	println("}                                                            {")
+	println("}                                                            {")
+	println("}                                                            {")
+	println("}                                                            {")
+	println("}============================================================{")
 }
